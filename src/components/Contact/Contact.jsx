@@ -2,8 +2,21 @@ import { RiContactsFill } from "react-icons/ri";
 import { FaPhoneAlt } from "react-icons/fa";
 
 import css from './Contact.module.css'
+import { deleteTask } from "../../redux/contactsSlice";
+import { useDispatch } from "react-redux";
 
-export default function Contact({ contacts: { id, name, number }, onDelete }) {
+
+
+export default function Contact({ name, number, id }) {
+
+    const dispatch = useDispatch();
+
+
+    const onDelete = (id) => {
+        dispatch(deleteTask(id));
+    };
+
+
     return (
         <li className={css.contactList}>
             <div className={css.listContainer}>
