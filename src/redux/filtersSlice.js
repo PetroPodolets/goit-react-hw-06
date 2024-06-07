@@ -9,20 +9,21 @@ const filtersSlice = createSlice({
     name: 'filters',
     initialState,
     reducers: {
-        setSearchQuery(state, action) {
+        changeFilter(state, action) {
             state.name = action.payload;
         },
     },
 });
 
-export const { setSearchQuery } = filtersSlice.actions;
+export const { changeFilter } = filtersSlice.actions;
 export default filtersSlice.reducer;
 
-// Селектор для отримання відфільтрованих контактів
+export const selectNameFilter = state => state.filters.name;
+
 export const selectFilteredContacts = createSelector(
     (state) => state.contacts.items,
-    (state) => state.filters.name,
-    (items, searchQuery) => items.filter((item) =>
-        item.name.toLowerCase().startsWith(searchQuery.toLowerCase())
+    selectNameFilter,
+    (items, nameFilter) => items.filter((item) =>
+        item.name.toLowerCase().startsWith(nameFilter.toLowerCase())
     )
 );

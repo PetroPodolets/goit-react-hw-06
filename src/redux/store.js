@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
-import { tasksReducer } from './contactsSlice';
+import { contactsReducer } from './contactsSlice';
 import searchReducer from './filtersSlice';
 
 import {
@@ -15,13 +15,13 @@ import {
 } from 'redux-persist';
 
 
-const persistedtasksReducer = persistReducer(
+const persistedContactsReducer = persistReducer(
     {
         key: 'items',
         storage,
         // whitelist: ['name', 'number'],
     },
-    tasksReducer
+    contactsReducer
 );
 
 
@@ -29,7 +29,7 @@ const persistedtasksReducer = persistReducer(
 
 export const store = configureStore({
     reducer: {
-        contacts: persistedtasksReducer,
+        contacts: persistedContactsReducer,
         filters: searchReducer,
 
     },
